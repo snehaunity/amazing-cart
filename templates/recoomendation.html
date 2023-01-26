@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <form method="GET" class="mt-5" action="{% url 'search' %}">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{location}}">
+        
+            <label for="shape">Shape:</label>
+            <select class="form-control" id="shape" name="shape">
+                <option value="">--Select--</option>
+                <option value="Oval">Oval</option>
+                <option value="Circle">Circle</option>
+                <option value="Shperical">Shperical</option>
+                <option value="Parabolic">Parabolic</option>
+                <option value="Rectagular">Rectagular</option>
+                <option value="Cone">Cone</option>
+                <option value="Cone">Cylinder</option>
+            </select>
+        
+            <label for="price_range">Price Range:</label>
+            <input class="form-control" type="number" id="price_range_min" name="price_range_min" placeholder="min" value="{{price_min}}">
+            <br>
+            <input class="form-control" type="number" id="price_range_max" name="price_range_max" placeholder="max" value="{{price_max}}">
+            <br>
+            <input class="form-control btn btn-primary" type="submit" value="Search">
+            <input type="hidden" value="1" name="page_num">
+
+        </form>
+        
+    </div>
+<div class="container">
+    <div class="recommendation_container">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Shape</th>
+                <th scope="col">Size</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{product.id}}</td>
+                        <td>{{product.shape}}</td>
+                        <td>{{product.size}}</td>
+                        <td>{{product.location}}</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="nextbtn container mb-3" style="display: flex;">
+    <div class="next-btn" style="width: 50%;">
+        {% if products.has_previous %}
+            <button class="btn btn-primary"><a style="color: white; text-decoration: none;" href="{% url 'search' %}?location={{location}}&shape={{shape}}&price_range_min={{price_min}}&price_range_max={{price_max}}&page_num={{products.previous_page_number}}">Previous</a></button>
+        {% else %}
+            <button class="btn btn-primary" disabled>Previous</button>
+        {% endif %}
+    </div>
+    <div class="previous-btn text-end" style="width: 50%;">
+        {% if products.has_next %}
+            <button class="btn btn-primary"><a style="color: white; text-decoration: none;" href="{% url 'search' %}?location={{location}}&shape={{shape}}&price_range_min={{price_min}}&price_range_max={{price_max}}&page_num={{products.next_page_number}}">Next</a></button>
+        {% else %}
+            <button class="btn btn-primary" disabled>Next</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
