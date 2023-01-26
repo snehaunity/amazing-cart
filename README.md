@@ -16,7 +16,7 @@ Installing
 
 
 - Clone the repository to your local machine
-`git clone https://github.com/your_username/django_project.git`
+`https://github.com/snehaunity/amazing-cart.git`
 
 - Navigate to the project directory
 `cd django_project`
