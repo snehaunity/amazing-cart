@@ -45,3 +45,6 @@ Django - The web framework used
 <a href="https://faker.readthedocs.io/en/master/">Faker</a> - Used to generate fake data
 Author
 - snehaUnity
+
+![Screenshot 1](https://github.com/snehaunity/amazing-cart/blob/main/screenshots/Screenshot_20230126_150751.png)
+
